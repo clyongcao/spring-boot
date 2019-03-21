@@ -6,7 +6,7 @@ package com.clyon.emus;
 public enum StatusCode {
 	
 	 /******* 通用异常*****/
-	CODE_200(200, "操作成功"),
+	CODE_200(200, "操作成功"), 
 	CODE_300(300, "操作失败"), 
 	CODE_301(301, "非登录用户操作,imei号不能为空"),
 	CODE_302(302, "亲不要频繁操作"),
