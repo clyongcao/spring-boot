@@ -1,9 +1,9 @@
-package com.clyon.redis.dto;
+package com.clyon.items.redis.vo;
 
-public class RedisStringDTO {
+public class RedisStringVO {
 
 	private String key;
-	
+
 	private String value;
 
 	public String getKey() {
@@ -21,5 +21,5 @@ public class RedisStringDTO {
 	public void setValue(String value) {
 		this.value = value;
 	}
-	
+
 }

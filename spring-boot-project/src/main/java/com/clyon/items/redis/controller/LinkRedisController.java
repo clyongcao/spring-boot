@@ -1,16 +1,14 @@
-package com.clyon.redis.controller;
+package com.clyon.items.redis.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.clyon.common.RespData;
 import com.clyon.emus.StatusCode;
 import com.clyon.exception.ServiceException;
-import com.clyon.redis.dto.RedisStringDTO;
-import com.clyon.redis.service.LinkRedisService;
+import com.clyon.items.redis.dto.RedisStringDTO;
+import com.clyon.items.redis.service.LinkRedisService;
 import com.clyon.util.StringUtil;
 
 @RestController

@@ -1,4 +1,4 @@
-package com.clyon.redis.service;
+package com.clyon.items.redis.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.clyon.emus.StatusCode;
 import com.clyon.exception.ServiceException;
-import com.clyon.redis.dto.RedisStringDTO;
-import com.clyon.redis.vo.RedisStringVO;
+import com.clyon.items.redis.dto.RedisStringDTO;
+import com.clyon.items.redis.vo.RedisStringVO;
 
 @Service
 public class LinkRedisService {
