@@ -1,4 +1,4 @@
-package com.clyon.redis.config;
+package com.clyon.config;
 
 import java.lang.reflect.Method;
 
