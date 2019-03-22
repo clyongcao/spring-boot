@@ -22,7 +22,7 @@ public class LinkRedisController {
 
 	@RequestMapping("/getString")
 	public RespData getString(RedisStringDTO dto) throws Exception {
-
+		
 		if (StringUtil.isBlank(dto.getKey())) {
 			throw new ServiceException(StatusCode.CODE_100001.value(), StatusCode.CODE_100001.remark());
 		}
