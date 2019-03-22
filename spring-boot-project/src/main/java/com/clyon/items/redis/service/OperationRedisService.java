@@ -11,12 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.clyon.emus.StatusCode;
 import com.clyon.exception.ServiceException;
 import com.clyon.items.redis.dto.RedisHashDTO;
+import com.clyon.items.redis.dto.RedisListDTO;
 import com.clyon.items.redis.dto.RedisStringDTO;
 import com.clyon.items.redis.vo.RedisStringVO;
 
-
 @Service
-public class LinkRedisService {
+public class OperationRedisService {
 
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
@@ -57,6 +57,12 @@ public class LinkRedisService {
 
 	}
 
+	public Object getHash(RedisHashDTO dto) {
+
+		return redisTemplate.opsForHash().get(dto.getKey(), dto.getHashKey());
+
+	}
+
 	@Transactional(rollbackFor = Exception.class)
 	public void setHash(RedisHashDTO dto) throws Exception {
 
@@ -64,7 +70,8 @@ public class LinkRedisService {
 		map.put(dto.getHashKey(), dto.getValue());
 
 		try {
-			//redisTemplate.opsForHash().put(dto.getKey(),dto.getHashKey(), dto.getValue());
+			// redisTemplate.opsForHash().put(dto.getKey(),dto.getHashKey(),
+			// dto.getValue());
 			redisTemplate.opsForHash().putAll(dto.getKey(), map);
 		} catch (Exception e) {
 			throw new ServiceException(StatusCode.CODE_100002.value(), StatusCode.CODE_100002.remark());
@@ -72,9 +79,38 @@ public class LinkRedisService {
 
 	}
 
-	public Object getHash(RedisHashDTO dto) {
-		
-		return redisTemplate.opsForHash().get(dto.getKey(), dto.getHashKey());
+	public Object popList(RedisListDTO dto) throws Exception {
+
+		if (dto.getOrientation().toLowerCase().equals("l")) {
+			return redisTemplate.opsForList().leftPop(dto.getKey());
+		} else if (dto.getOrientation().toLowerCase().equals("r")) {
+			return redisTemplate.opsForList().rightPop(dto.getKey());
+		} else {
+			throw new ServiceException(StatusCode.CODE_100002.value(), StatusCode.CODE_100002.remark());
+		}
+
+	}
+
+	public Object rangeList(RedisListDTO dto) throws Exception {
+
+		return redisTemplate.opsForList().range(dto.getKey(), 0, -1);
+
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	public void setList(RedisListDTO dto) throws Exception {
+
+		try {
+			if (dto.getOrientation().toLowerCase().equals("l")) {
+				redisTemplate.opsForList().leftPush(dto.getKey(), dto.getValue());
+			} else if (dto.getOrientation().toLowerCase().equals("r")) {
+				redisTemplate.opsForList().rightPush(dto.getKey(), dto.getValue());
+			} else {
+				throw new ServiceException(StatusCode.CODE_100002.value(), StatusCode.CODE_100002.remark());
+			}
+		} catch (Exception e) {
+			throw new ServiceException(StatusCode.CODE_100002.value(), StatusCode.CODE_100002.remark());
+		}
 
 	}
 
