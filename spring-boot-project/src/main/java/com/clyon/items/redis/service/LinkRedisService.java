@@ -1,5 +1,7 @@
 package com.clyon.items.redis.service;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -8,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.clyon.emus.StatusCode;
 import com.clyon.exception.ServiceException;
+import com.clyon.items.redis.dto.RedisHashDTO;
 import com.clyon.items.redis.dto.RedisStringDTO;
 import com.clyon.items.redis.vo.RedisStringVO;
+
 
 @Service
 public class LinkRedisService {
@@ -43,13 +47,34 @@ public class LinkRedisService {
 	}
 
 	@Transactional(rollbackFor = Exception.class)
-	public void delString(String key) throws Exception {
+	public void delString(RedisStringDTO dto) throws Exception {
 
 		try {
-			stringRedisTemplate.delete(key);
+			stringRedisTemplate.delete(dto.getKey());
 		} catch (Exception e) {
 			throw new ServiceException(StatusCode.CODE_100003.value(), StatusCode.CODE_100003.remark());
 		}
+
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	public void setHash(RedisHashDTO dto) throws Exception {
+
+		HashMap<String, Object> map = new HashMap<>();
+		map.put(dto.getHashKey(), dto.getValue());
+
+		try {
+			//redisTemplate.opsForHash().put(dto.getKey(),dto.getHashKey(), dto.getValue());
+			redisTemplate.opsForHash().putAll(dto.getKey(), map);
+		} catch (Exception e) {
+			throw new ServiceException(StatusCode.CODE_100002.value(), StatusCode.CODE_100002.remark());
+		}
+
+	}
+
+	public Object getHash(RedisHashDTO dto) {
+		
+		return redisTemplate.opsForHash().get(dto.getKey(), dto.getHashKey());
 
 	}
 
