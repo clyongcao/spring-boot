@@ -82,7 +82,7 @@ public class OperationRedisController {
 
 	}
 	
-	@RequestMapping("/getList")
+	@RequestMapping("/popList")
 	public RespData popList(RedisListDTO dto) throws Exception {
 
 		if (StringUtil.isBlank(dto.getKey()) || StringUtil.isBlank(dto.getOrientation())) {
@@ -104,14 +104,14 @@ public class OperationRedisController {
 
 	}
 
-	@RequestMapping("/setList")
-	public RespData setList(RedisListDTO dto) throws Exception {
+	@RequestMapping("/pushList")
+	public RespData pushList(RedisListDTO dto) throws Exception {
 
 		if (StringUtil.isBlank(dto.getKey()) || StringUtil.isBlank(dto.getValue()) || StringUtil.isBlank(dto.getOrientation())) {
 			throw new ServiceException(StatusCode.CODE_100001.value(), StatusCode.CODE_100001.remark());
 		}
 
-		operationRedisService.setList(dto);
+		operationRedisService.pushList(dto);
 
 		return RespData.success("保存成功");
 

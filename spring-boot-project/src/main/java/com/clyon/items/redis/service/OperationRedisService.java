@@ -98,7 +98,7 @@ public class OperationRedisService {
 	}
 
 	@Transactional(rollbackFor = Exception.class)
-	public void setList(RedisListDTO dto) throws Exception {
+	public void pushList(RedisListDTO dto) throws Exception {
 
 		try {
 			if (dto.getOrientation().toLowerCase().equals("l")) {
