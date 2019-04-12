@@ -1,11 +1,9 @@
-package com.clyon.items.redis.dto;
+package com.clyon.dto.redis;
 
-public class RedisHashDTO {
+public class RedisStringDTO {
 
 	private String key;
-
-	private String hashKey;
-
+	
 	private String value;
 
 	public String getKey() {
@@ -16,14 +14,6 @@ public class RedisHashDTO {
 		this.key = key;
 	}
 
-	public String getHashKey() {
-		return hashKey;
-	}
-
-	public void setHashKey(String hashKey) {
-		this.hashKey = hashKey;
-	}
-
 	public String getValue() {
 		return value;
 	}
@@ -31,5 +21,5 @@ public class RedisHashDTO {
 	public void setValue(String value) {
 		this.value = value;
 	}
-
+	
 }

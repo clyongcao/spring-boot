@@ -1,12 +1,12 @@
-package com.clyon.items.redis.dto;
+package com.clyon.dto.redis;
 
-public class RedisListDTO {
+public class RedisHashDTO {
 
 	private String key;
-	
+
+	private String hashKey;
+
 	private String value;
-	
-	private String orientation;
 
 	public String getKey() {
 		return key;
@@ -14,6 +14,14 @@ public class RedisListDTO {
 
 	public void setKey(String key) {
 		this.key = key;
+	}
+
+	public String getHashKey() {
+		return hashKey;
+	}
+
+	public void setHashKey(String hashKey) {
+		this.hashKey = hashKey;
 	}
 
 	public String getValue() {
@@ -24,12 +32,4 @@ public class RedisListDTO {
 		this.value = value;
 	}
 
-	public String getOrientation() {
-		return orientation;
-	}
-
-	public void setOrientation(String orientation) {
-		this.orientation = orientation;
-	}
-	
 }

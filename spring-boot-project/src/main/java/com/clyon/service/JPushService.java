@@ -1,4 +1,4 @@
-package com.clyon.items.jpush.service;
+package com.clyon.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

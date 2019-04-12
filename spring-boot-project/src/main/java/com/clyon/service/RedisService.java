@@ -1,4 +1,4 @@
-package com.clyon.items.redis.service;
+package com.clyon.service;
 
 import java.util.HashMap;
 
@@ -8,15 +8,15 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.clyon.dto.redis.RedisHashDTO;
+import com.clyon.dto.redis.RedisListDTO;
+import com.clyon.dto.redis.RedisStringDTO;
 import com.clyon.emus.StatusCode;
 import com.clyon.exception.ServiceException;
-import com.clyon.items.redis.dto.RedisHashDTO;
-import com.clyon.items.redis.dto.RedisListDTO;
-import com.clyon.items.redis.dto.RedisStringDTO;
-import com.clyon.items.redis.vo.RedisStringVO;
+import com.clyon.vo.redis.RedisStringVO;
 
 @Service
-public class OperationRedisService {
+public class RedisService {
 
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
@@ -41,7 +41,7 @@ public class OperationRedisService {
 		try {
 			stringRedisTemplate.opsForValue().set(dto.getKey(), dto.getValue());
 		} catch (Exception e) {
-			throw new ServiceException(StatusCode.CODE_100002.value(), StatusCode.CODE_100002.remark());
+			throw new ServiceException(StatusCode.CODE_702.value(), StatusCode.CODE_702.remark());
 		}
 
 	}
@@ -52,7 +52,7 @@ public class OperationRedisService {
 		try {
 			stringRedisTemplate.delete(dto.getKey());
 		} catch (Exception e) {
-			throw new ServiceException(StatusCode.CODE_100003.value(), StatusCode.CODE_100003.remark());
+			throw new ServiceException(StatusCode.CODE_703.value(), StatusCode.CODE_703.remark());
 		}
 
 	}
@@ -74,7 +74,7 @@ public class OperationRedisService {
 			// dto.getValue());
 			redisTemplate.opsForHash().putAll(dto.getKey(), map);
 		} catch (Exception e) {
-			throw new ServiceException(StatusCode.CODE_100002.value(), StatusCode.CODE_100002.remark());
+			throw new ServiceException(StatusCode.CODE_702.value(), StatusCode.CODE_702.remark());
 		}
 
 	}
@@ -86,7 +86,7 @@ public class OperationRedisService {
 		} else if (dto.getOrientation().toLowerCase().equals("r")) {
 			return redisTemplate.opsForList().rightPop(dto.getKey());
 		} else {
-			throw new ServiceException(StatusCode.CODE_100002.value(), StatusCode.CODE_100002.remark());
+			throw new ServiceException(StatusCode.CODE_702.value(), StatusCode.CODE_702.remark());
 		}
 
 	}
@@ -106,10 +106,10 @@ public class OperationRedisService {
 			} else if (dto.getOrientation().toLowerCase().equals("r")) {
 				redisTemplate.opsForList().rightPush(dto.getKey(), dto.getValue());
 			} else {
-				throw new ServiceException(StatusCode.CODE_100002.value(), StatusCode.CODE_100002.remark());
+				throw new ServiceException(StatusCode.CODE_702.value(), StatusCode.CODE_702.remark());
 			}
 		} catch (Exception e) {
-			throw new ServiceException(StatusCode.CODE_100002.value(), StatusCode.CODE_100002.remark());
+			throw new ServiceException(StatusCode.CODE_702.value(), StatusCode.CODE_702.remark());
 		}
 
 	}

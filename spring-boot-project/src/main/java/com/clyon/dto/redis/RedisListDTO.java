@@ -1,10 +1,12 @@
-package com.clyon.items.redis.vo;
+package com.clyon.dto.redis;
 
-public class RedisStringVO {
+public class RedisListDTO {
 
 	private String key;
-
+	
 	private String value;
+	
+	private String orientation;
 
 	public String getKey() {
 		return key;
@@ -22,4 +24,12 @@ public class RedisStringVO {
 		this.value = value;
 	}
 
+	public String getOrientation() {
+		return orientation;
+	}
+
+	public void setOrientation(String orientation) {
+		this.orientation = orientation;
+	}
+	
 }

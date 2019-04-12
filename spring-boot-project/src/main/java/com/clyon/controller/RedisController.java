@@ -1,24 +1,24 @@
-package com.clyon.items.redis.controller;
+package com.clyon.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.clyon.common.RespData;
+import com.clyon.dto.redis.RedisHashDTO;
+import com.clyon.dto.redis.RedisListDTO;
+import com.clyon.dto.redis.RedisStringDTO;
 import com.clyon.emus.StatusCode;
 import com.clyon.exception.ServiceException;
-import com.clyon.items.redis.dto.RedisHashDTO;
-import com.clyon.items.redis.dto.RedisListDTO;
-import com.clyon.items.redis.dto.RedisStringDTO;
-import com.clyon.items.redis.service.OperationRedisService;
+import com.clyon.service.RedisService;
 import com.clyon.util.StringUtil;
 
 @RestController
 @RequestMapping(value = "/redis")
-public class OperationRedisController {
+public class RedisController {
 
 	@Autowired
-	private OperationRedisService operationRedisService;
+	private RedisService redisService;
 
 	@RequestMapping("/getString")
 	public RespData getString(RedisStringDTO dto) throws Exception {
@@ -27,7 +27,7 @@ public class OperationRedisController {
 			throw new ServiceException(StatusCode.CODE_100001.value(), StatusCode.CODE_100001.remark());
 		}
 
-		return RespData.success(operationRedisService.getString(dto.getKey()));
+		return RespData.success(redisService.getString(dto.getKey()));
 
 	}
 
@@ -38,7 +38,7 @@ public class OperationRedisController {
 			throw new ServiceException(StatusCode.CODE_100001.value(), StatusCode.CODE_100001.remark());
 		}
 
-		operationRedisService.setString(dto);
+		redisService.setString(dto);
 
 		return RespData.success("保存成功");
 
@@ -51,7 +51,7 @@ public class OperationRedisController {
 			throw new ServiceException(StatusCode.CODE_100001.value(), StatusCode.CODE_100001.remark());
 		}
 
-		operationRedisService.delString(dto);
+		redisService.delString(dto);
 
 		return RespData.success("删除成功");
 
@@ -64,7 +64,7 @@ public class OperationRedisController {
 			throw new ServiceException(StatusCode.CODE_100001.value(), StatusCode.CODE_100001.remark());
 		}
 
-		return RespData.success(operationRedisService.getHash(dto));
+		return RespData.success(redisService.getHash(dto));
 
 	}
 
@@ -76,7 +76,7 @@ public class OperationRedisController {
 			throw new ServiceException(StatusCode.CODE_100001.value(), StatusCode.CODE_100001.remark());
 		}
 
-		operationRedisService.setHash(dto);
+		redisService.setHash(dto);
 
 		return RespData.success("保存成功");
 
@@ -89,7 +89,7 @@ public class OperationRedisController {
 			throw new ServiceException(StatusCode.CODE_100001.value(), StatusCode.CODE_100001.remark());
 		}
 
-		return RespData.success(operationRedisService.popList(dto));
+		return RespData.success(redisService.popList(dto));
 
 	}
 	
@@ -100,7 +100,7 @@ public class OperationRedisController {
 			throw new ServiceException(StatusCode.CODE_100001.value(), StatusCode.CODE_100001.remark());
 		}
 
-		return RespData.success(operationRedisService.rangeList(dto));
+		return RespData.success(redisService.rangeList(dto));
 
 	}
 
@@ -111,7 +111,7 @@ public class OperationRedisController {
 			throw new ServiceException(StatusCode.CODE_100001.value(), StatusCode.CODE_100001.remark());
 		}
 
-		operationRedisService.pushList(dto);
+		redisService.pushList(dto);
 
 		return RespData.success("保存成功");
 
