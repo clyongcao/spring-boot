@@ -49,6 +49,13 @@ public class StringTest {
 			System.out.println(string);
 		}
 
+		String content = "dsd,fgp,ght,fpk";
+		if(content.split(",").length > 3) {
+			System.out.println("超啦！");
+		} else {
+			System.out.println("没超！");
+		}
+
 	}
 
 	@Test
@@ -120,4 +127,17 @@ public class StringTest {
 	
 	System.out.println(sb2.toString());
 	}
+	
+	@Test
+	public void indexOfTest() {
+		
+		String content =  "你是划老公！";
+		String sensitiveWord =  "划老公";
+			
+		Integer res = content.indexOf(sensitiveWord);
+		
+		System.out.println(res);
+			
+	}
+	
 }
