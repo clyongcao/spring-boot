@@ -140,4 +140,13 @@ public class StringTest {
 			
 	}
 	
+	@Test
+	public void substringTest() {
+		
+		String content =  "开头是啥，我测测";
+		
+		System.out.println(content.substring(0,1));
+		
+	}
+	
 }
