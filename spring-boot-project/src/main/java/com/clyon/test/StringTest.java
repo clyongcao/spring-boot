@@ -44,7 +44,7 @@ public class StringTest {
 			System.out.println(string);
 			// System.out.println(string.length());
 		}
-		System.out.println("***************************************************************************************");
+		System.out.println("*************************************************************************************");
 		for (String string : str2s) {
 			System.out.println(string);
 		}
