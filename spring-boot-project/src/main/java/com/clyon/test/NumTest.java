@@ -107,5 +107,15 @@ public class NumTest {
 		System.out.println("equlas? : "+ (differOrders == 0));
 		
 	}
+	
+	@Test
+	public void intergerTest() {
+		
+		Integer a = 0;
+		int b = 0;
+		
+		System.out.println("res: " + (a <= b));
+		
+	}
 
 }

@@ -3,6 +3,8 @@ package com.clyon.test;
 import org.junit.Test;
 
 public class Syso {
+	
+	String name;
 
 	public static void main(String[] args) {
 	
@@ -24,5 +26,18 @@ public class Syso {
 		System.out.println("dtEx2:"+dtEx2.a);
 		
 	}
+
+	public void pt(String str) {
+		
+		System.out.println(str);
+		
+	}
+	
+	public Syso(String name) {
+		super();
+		this.name = name;
+	}
+	
+	
 	
 }

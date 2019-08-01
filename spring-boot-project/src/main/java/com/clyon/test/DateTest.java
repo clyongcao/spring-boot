@@ -15,6 +15,8 @@ public class DateTest {
 
 	String a = "10";
 
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
 	public static void main(String[] args) throws ParseException {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -76,6 +78,18 @@ public class DateTest {
 	}
 
 	@Test
+	public void yyyy() {
+
+		SimpleDateFormat ordersdf = new SimpleDateFormat("yyyy");
+
+		Date todayDate = new Date();
+		String todayDateStr = ordersdf.format(todayDate);
+
+		System.out.println(todayDateStr);
+
+	}
+
+	@Test
 	public void subDateStr() throws ParseException {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -130,6 +144,17 @@ public class DateTest {
 
 	}
 
+	@Test
+	public void testsEWeekMonth() throws ParseException {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+
+		Date date = sdf.parse("2019-05");
+
+		this.sEWeek(date);
+
+	}
+
 	public void sEWeek(Date date) {
 
 		Calendar ca = Calendar.getInstance();
@@ -152,11 +177,11 @@ public class DateTest {
 		String str2 = f.format(date2);
 
 		System.out.println("开始：" + str1 + "  " + "结束" + str2);
+		System.out.println("开始：" + date1 + "  " + "结束" + date1);
 	}
 
 	public void sEMonth(Date date) {
 
-		// 获取本月一号和后一天的日期：
 		Calendar ca = Calendar.getInstance();
 		ca.setTime(date);
 		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
@@ -176,12 +201,45 @@ public class DateTest {
 
 	}
 
+	/**
+	 * @description: 获取本年第一天和最后一天的时间
+	 * @param: date
+	 * @return: 返回类型为List：[0]第一天 00:00:00、[1]最后一天 23:59:59，日期格式为：yyyy-MM-dd HH:mm:ss
+	 * @throws ParseException
+	 */
+	@Test
+	public void getStartAndEndyear() throws ParseException {
+
+		SimpleDateFormat ySdf = new SimpleDateFormat("yyyy");
+		Date date = new Date(ySdf.parse("2018").getTime());
+
+		SimpleDateFormat yMdHmsSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar ca = Calendar.getInstance();
+		ca.setTime(date);
+		int year = ca.get(Calendar.YEAR);
+		Calendar cal = (Calendar) ca.clone();
+		cal.clear();
+		cal.set(year, 0, 01);
+		System.out.println("cal0："+cal.getTime());
+		Date date0 = this.convertTimeToZreo(cal.getTime());
+		cal.clear();
+		cal.set(year, 11, 31);
+		System.out.println("cal1："+cal.getTime());
+		Date date1 = this.convertTimeToMaxTime(cal.getTime());
+		String str0 = yMdHmsSdf.format(date0);
+		String str1 = yMdHmsSdf.format(date1);
+
+		System.out.println("年：" + year);
+		System.out.println("开始：" + str0 + "  结束：" + str1);
+
+	}
+
 	@Test
 	public void getSEWeekMonth() throws ParseException {
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 
-		Date wMdate = sdf.parse("2018-03-05");
+		Date wMdate = sdf.parse("2019-05");
 
 		this.sEWeek(wMdate);
 		this.sEMonth(wMdate);
@@ -236,6 +294,48 @@ public class DateTest {
 		System.out.print(endDate + "  ");
 		System.out.println("      " + endDateStr + "  ");
 
+	}
+
+	@Test
+	public void beforeTest() throws ParseException {
+
+		Date date = sdf.parse("2018-11-04");
+		boolean res = date.before(now);
+
+		System.out.println(res);
+
+	}
+
+	/**
+	 * 转换时间为当前日期 0时0分0秒
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public Date convertTimeToZreo(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		return calendar.getTime();
+	}
+
+	/**
+	 * 转换时间为当前日期 23时59分59秒
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public Date convertTimeToMaxTime(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.HOUR_OF_DAY, 23);
+		calendar.set(Calendar.MINUTE, 59);
+		calendar.set(Calendar.SECOND, 59);
+		calendar.set(Calendar.MILLISECOND, 0);
+		return calendar.getTime();
 	}
 
 }

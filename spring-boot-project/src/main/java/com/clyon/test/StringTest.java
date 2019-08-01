@@ -1,6 +1,9 @@
 package com.clyon.test;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import org.junit.Test;
@@ -49,8 +52,15 @@ public class StringTest {
 			System.out.println(string);
 		}
 
-		String content = "dsd,fgp,ght,fpk";
-		if(content.split(",").length > 3) {
+		String content = "dsd";
+
+		String[] contentSplit = content.split(",");
+
+		for (String string : contentSplit) {
+			System.out.println("have','：" + string);
+		}
+
+		if (contentSplit.length > 3) {
 			System.out.println("超啦！");
 		} else {
 			System.out.println("没超！");
@@ -73,7 +83,7 @@ public class StringTest {
 		System.out.println(sb.toString());
 
 	}
- 
+
 	@Test
 	public void triangle() {
 
@@ -105,48 +115,105 @@ public class StringTest {
 		}
 
 	}
-	
+
 	@Test
 	public void equalsTest2() {
-	StringBuilder sb = new StringBuilder();
-	StringBuilder sb2 = new StringBuilder();
-	sb.append("SELECT sponsor,bind_merchant_id bindMerchantId,bind_store_id bindStoreId, "
-			+ " sponsor_merchant_id sponsorMerchantId,sponsor_store_id sponsorStoreId, "
-			+ " status,cancelor,create_by createBy,update_by updateBy,create_time createTime, "
-			+ " update_time updateTime,audit_remark auditRemark,cancel_remark cancelRemark "
-			+ " FROM t_merchant_shop_bind WHERE is_delete=0 AND ");
-	
-	sb2.append("SELECT m.id,m.name,m.merchant_code merchantCode, "
-			+ " m.contact_man contactMan,m.telephone,m.create_time createTime, "
-			+ " m.create_type createType,m.whether_invoice whetherInvoice,"
-			+ " p.audit_status status,s.name storeName "
-			+ " FROM t_merchant m "
-			+ " LEFT JOIN t_merchant_progress p ON p.merchant_id=m.id"
-			+ " LEFT JOIN t_merchant_store s ON s.merchant_id=m.id "
-			+ " WHERE m.is_delete = 0 ");
-	
-	System.out.println(sb2.toString());
+		StringBuilder sb = new StringBuilder();
+		StringBuilder sb2 = new StringBuilder();
+		sb.append("SELECT sponsor,bind_merchant_id bindMerchantId,bind_store_id bindStoreId, "
+				+ " sponsor_merchant_id sponsorMerchantId,sponsor_store_id sponsorStoreId, "
+				+ " status,cancelor,create_by createBy,update_by updateBy,create_time createTime, "
+				+ " update_time updateTime,audit_remark auditRemark,cancel_remark cancelRemark "
+				+ " FROM t_merchant_shop_bind WHERE is_delete=0 AND ");
+
+		sb2.append("SELECT m.id,m.name,m.merchant_code merchantCode, "
+				+ " m.contact_man contactMan,m.telephone,m.create_time createTime, "
+				+ " m.create_type createType,m.whether_invoice whetherInvoice,"
+				+ " p.audit_status status,s.name storeName " + " FROM t_merchant m "
+				+ " LEFT JOIN t_merchant_progress p ON p.merchant_id=m.id"
+				+ " LEFT JOIN t_merchant_store s ON s.merchant_id=m.id " + " WHERE m.is_delete = 0 ");
+
+		System.out.println(sb2.toString());
 	}
-	
+
 	@Test
 	public void indexOfTest() {
-		
-		String content =  "你是划老公！";
-		String sensitiveWord =  "划老公";
-			
+
+		String content = "你是划老公！";
+		String sensitiveWord = "划老公";
+
 		Integer res = content.indexOf(sensitiveWord);
-		
+
 		System.out.println(res);
-			
+
 	}
-	
+
 	@Test
 	public void substringTest() {
-		
-		String content =  "开头是啥，我测测";
-		
-		System.out.println(content.substring(0,1));
-		
+
+		String content = "开头是啥，我测测";
+
+		System.out.println(content.substring(0, 1));
+
+	}
+
+	@Test
+	public void nullToStrTest() {
+
+		System.out.println(nullToStr("开头是啥，我测测"));
+		System.out.println(nullToStr(""));
+		System.out.println(nullToStr(new BigDecimal("2150.00")));
+		System.out.println(nullToStr(null));
+		String a = "f";
+		String b = "f";
+		System.out.println(a == b);
+		System.out.println(a.equals(b));
+
+	}
+
+	public String nullToStr(Object value) {
+
+		if (value == null || value == "") {
+			return "-";
+		} else {
+			return String.valueOf(value);
+		}
+
+	}
+
+	@Test
+	public void testSplit() throws Exception {
+
+		List<Integer> idList = new ArrayList<>();
+/*
+		String[] idStrs = new String[] { "15", "20", "1070" };
+		for (String idstr : idStrs) {
+			idList.add(Integer.valueOf(idstr));
+		}
+
+		if (idList.size() == 0) {
+			throw new ServiceException(GlobalStatusCode.CODE_770012.value(), GlobalStatusCode.CODE_770012.remark());
+		}
+
+		for(Integer id : idList) {
+			System.out.println();
+		}*/
+
 	}
 	
+
+	@Test
+	public void testEquals() throws Exception {
+		
+		String dog1 = new String("coco");
+		String dog2 = new String("coco");
+		
+		Syso s1 = new Syso("coco");
+		Syso s2 = new Syso("coco");
+				
+		System.out.println(dog1.equals(dog2));
+		System.out.println(s1.equals(s2));
+				
+	}
+
 }
