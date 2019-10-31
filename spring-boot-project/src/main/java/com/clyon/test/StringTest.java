@@ -16,22 +16,7 @@ import org.junit.Test;
 public class StringTest {
 
 	public static void main(String[] args) {
-
-		// String ifStr = "TWMD" ;
-
-		System.out.println("TWMD".indexOf("T"));
-		System.out.println("TWMD".indexOf("t"));
-		System.out.println("TWMD".indexOf("M"));
-		System.out.println("TWMD".indexOf("m"));
-		System.out.println("TWMD".indexOf("l"));
-
-		System.out.println(
-				"http://img01.sys.iflashbuy.com:8282/group2/M00/07/A5/wKgF-lvVpC-AUq7xAAB3yqOhYD4789.jpg".length());
-
-		System.out.println("广东省广州市" + null);
-
-		System.out.println(new HashMap());
-
+		
 	}
 
 	@Test
@@ -146,6 +131,21 @@ public class StringTest {
 
 		System.out.println(res);
 
+		// String ifStr = "TWMD" ;
+
+		System.out.println("TWMD".indexOf("T"));
+		System.out.println("TWMD".indexOf("t"));
+		System.out.println("TWMD".indexOf("M"));
+		System.out.println("TWMD".indexOf("m"));
+		System.out.println("TWMD".indexOf("l"));
+
+		System.out.println(
+				"http://img01.sys.iflashbuy.com:8282/group2/M00/07/A5/wKgF-lvVpC-AUq7xAAB3yqOhYD4789.jpg".length());
+
+		System.out.println("广东省广州市" + null);
+
+		System.out.println(new HashMap());
+
 	}
 
 	@Test
@@ -154,6 +154,10 @@ public class StringTest {
 		String content = "开头是啥，我测测";
 
 		System.out.println(content.substring(0, 1));
+
+		String title = "【仅剩?1个名额】快和我一起在码上花?2元拼?3";
+
+		System.out.println(title.substring(title.indexOf("】")+1));
 
 	}
 
@@ -185,35 +189,84 @@ public class StringTest {
 	public void testSplit() throws Exception {
 
 		List<Integer> idList = new ArrayList<>();
-/*
-		String[] idStrs = new String[] { "15", "20", "1070" };
-		for (String idstr : idStrs) {
-			idList.add(Integer.valueOf(idstr));
-		}
-
-		if (idList.size() == 0) {
-			throw new ServiceException(GlobalStatusCode.CODE_770012.value(), GlobalStatusCode.CODE_770012.remark());
-		}
-
-		for(Integer id : idList) {
-			System.out.println();
-		}*/
-
+		/*
+		 * String[] idStrs = new String[] { "15", "20", "1070" }; for (String idstr :
+		 * idStrs) { idList.add(Integer.valueOf(idstr)); }
+		 * 
+		 * if (idList.size() == 0) { throw new
+		 * ServiceException(GlobalStatusCode.CODE_770012.value(),
+		 * GlobalStatusCode.CODE_770012.remark()); }
+		 * 
+		 * for(Integer id : idList) { System.out.println(); }
+		 */
 	}
-	
 
 	@Test
 	public void testEquals() throws Exception {
-		
+
 		String dog1 = new String("coco");
 		String dog2 = new String("coco");
-		
+
 		Syso s1 = new Syso("coco");
 		Syso s2 = new Syso("coco");
-				
+
 		System.out.println(dog1.equals(dog2));
 		System.out.println(s1.equals(s2));
-				
+
+	}
+
+	@Test
+	public void testSM() throws Exception {
+		int status = 5;
+		System.out.println(status == 5 ? "" : "hello");
+	}
+
+	@Test
+	public void testRepalce() throws Exception {
+		String title1 = "dsdb?1sdkfhjksd";
+		title1 = title1.replace("替换", "?1");
+		System.out.println(title1);
+
+		String title2 = "dsdb?1sdkfhjksd";
+		title2 = title2.replace("?1", "替换");
+		System.out.println(title2);
+	}
+
+	@Test
+	public void testIndexof() throws Exception {
+		String url = "http://tmsh-m.z-code.cn:8383/fightGroup/detail?";
+		int i1 = url.indexOf("fig");
+		int i2 = url.indexOf(10);
+		String title = url.substring(url.indexOf("http"), url.indexOf("/f"));
+		System.out.println(i1 + " " + i2);
+		System.out.println(title);
+	}
+
+	@Test
+	public void testFormat() throws Exception {
+		String s1 = "%s只要%s元，我正在码上花进行砍价";
+		String s2 = "只要%s元砍%s，我正在码上花进行砍价,快来参加%s活动";
+		
+		String s1s = s1.format(s1, "欧莱雅", 99.99);
+		String s2s = s2.format(s2, 99.99, "欧莱雅", "拼团");
+		
+		System.out.println(String.format("%%%s%%", "替换"));
+		
+		int num = 123456;
+		String numStr = "0000000" + num;
+		numStr = numStr.substring(numStr.length() - 6);
+		
+		System.out.println(numStr);
+		//System.out.println(s2s);
+		
+		Integer getStatus = 0;
+		Integer getAuditState = 3;
+		
+		if (getStatus.equals(0) && getAuditState.equals(3)) {
+           System.err.println("上");
+        } else {
+        	System.err.println("下");
+        }
 	}
 
 }
