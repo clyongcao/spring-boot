@@ -1,23 +1,25 @@
 package com.clyon.bean.elasticsearch;
 
+import java.io.Serializable;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-@Document(indexName = "cestest", type = "student")
-public class Student {
+@Document(indexName = "jindex", type = "beverages")
 
+public class BeverageEsBean implements Serializable {
+	
 	@Id
-	@Field(type = FieldType.Long, store = true)
+	@Field(fielddata = true)
 	private long id;
 
-	@Field(type = FieldType.Text, store = true)
+	@Field(type = FieldType.Text, store = true, analyzer = "chinese")
 	private String name;
 	
-	private Integer age;
-
-	private String sex;
+	@Field(type = FieldType.Text, store = true, analyzer = "chinese")
+	private String description;
 
 	public long getId() {
 		return id;
@@ -25,14 +27,6 @@ public class Student {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
 	}
 
 	public String getName() {
@@ -43,12 +37,12 @@ public class Student {
 		this.name = name;
 	}
 
-	public String getSex() {
-		return sex;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-
+	
 }
